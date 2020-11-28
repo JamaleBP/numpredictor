@@ -36,7 +36,7 @@ if(typeof G_vmlCanvasManager != 'undefined') {
     canvas = G_vmlCanvasManager.initElement(canvas);
 }
 context = canvas.getContext("2d");
-
+context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 // when the user clicks the canvas we record the position in an array via addClick
 // function then updates canvas with redraw
 $('#canvas').mousedown(function(e){
@@ -79,7 +79,7 @@ function addClick(x, y, dragging)
 // Clear Canvas 
 function clearCanvas()
 {
-  context.clearRect(0, 0, canvasWidth, canvasHeight);
+  context.fillRect(0, 0, canvasWidth, canvasHeight);
   clickX = new Array();
   clickY = new Array();
   clickDrag = new Array();
@@ -109,7 +109,7 @@ function sendCanvas(){
   var pred_num = "";
   apigClient.posttolambdaPost(params,body = blobData,additionalParams)
     .then(function(data, error){
-      alert("Successfully called API")
+      //alert("Successfully called API")
       console.log(data);
       //jdata = data.parse();
       console.log(data.data.message);
@@ -130,12 +130,12 @@ function sendCanvas(){
 
 // function to implement the drawing
 function redraw(){
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  context.fillRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
   //clearCanvas();
   //context.strokeStyle = "#16099c";
-  context.strokeStyle = "#df4b26";
+  context.strokeStyle = "#ffffff"//"#df4b26";
   context.lineJoin = "round";
-  context.lineWidth = 3;
+  context.lineWidth = 2;
             
   for(var i=0; i < clickX.length; i++) {
     context.beginPath();
