@@ -21,7 +21,8 @@ var s3 = new AWS.S3({
   apiVersion: "2006-03-01",
   params: { Bucket: albumBucketName }
 });
-
+// initialize clear variable
+var clr = 0 ;
 
 //initialize canvas
 var canvasWidth = 28
@@ -83,6 +84,7 @@ function clearCanvas()
   clickX = new Array();
   clickY = new Array();
   clickDrag = new Array();
+  document.getElementById("output").innerHTML = "Your old number: " + clr + " Draw a new number!";
 }
 function dataURItoBlob(dataURI) {
     var binary = atob(dataURI.split(',')[1]);
@@ -114,6 +116,7 @@ function sendCanvas(){
       //jdata = data.parse();
       console.log(data.data.message);
       //pred_num = data.data.message;
+      clr = data.data.message;
       document.getElementById("output").innerHTML = "You Predicted number is: "+data.data.message;
     }).catch( function(data, error){
       alert("Error in contacting API")
@@ -133,7 +136,7 @@ function redraw(){
   context.fillRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
   //clearCanvas();
   //context.strokeStyle = "#16099c";
-  context.strokeStyle = "#ffffff"//"#df4b26";
+  context.strokeStyle = "#ffffff";//"#df4b26";
   context.lineJoin = "round";
   context.lineWidth = 2;
             
