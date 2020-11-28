@@ -25,8 +25,8 @@ var s3 = new AWS.S3({
 var clr = 0 ;
 
 //initialize canvas
-var canvasWidth = 28
-var canvasHeight = 28
+var canvasWidth = 128
+var canvasHeight = 128
 var canvasDiv = document.getElementById('canvasDiv');
 canvas = document.createElement('canvas');
 canvas.setAttribute('width', canvasWidth);
@@ -138,7 +138,7 @@ function redraw(){
   //context.strokeStyle = "#16099c";
   context.strokeStyle = "#ffffff";//"#df4b26";
   context.lineJoin = "round";
-  context.lineWidth = 2;
+  context.lineWidth = 3;
             
   for(var i=0; i < clickX.length; i++) {
     context.beginPath();
