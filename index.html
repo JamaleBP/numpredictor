@@ -1,0 +1,28 @@
+<html lang="en-US">
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+    <head>
+        <title>Symbol Recognizer</title>
+        <h1>Symbol Recognizer</h1>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.739.0.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+        <script type="text/javascript" src="canvaJS.js" defer></script>
+    </head>
+    <body>
+        <div id="output">Enter a Number!</div>
+        <div id="canvasDiv" style="border:1px solid blue; width: 28px;"></div>
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="sendCanvas()">Send</button>
+    </body>
+</html>
+
+
