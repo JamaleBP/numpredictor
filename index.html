@@ -13,16 +13,17 @@
     <head>
         <title>Number Labeler</title>
         <h1>Number Labeler</h1>
-        <h2 style="color: red">Machine learning algorithm disabled to save costs. To coordinate a demonstration please email jaybp95@gmail.com or text 214-682-8887</h2>
+        <h2 id='status'>Initializing</h2>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.739.0.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
         <script type="text/javascript" src="canvaJS.js" defer></script>
     </head>
     <body>
-        <div id="output">Enter a Number!</div>
+        <div id="output">Draw a Number with your mouse!</div>
         <div id="canvasDiv" style="border:1px solid blue; width: 128px;"></div>
         <button onclick="clearCanvas()">Clear</button>
-        <button onclick="sendCanvas()">Send</button>
+        <button onclick="sendCanvas()" id = "btn1">Send</button>
+        <button onclick="createEndpoint()" id = "btn2">Create Endpoint</button>
     </body>
 </html>
 

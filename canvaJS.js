@@ -2,6 +2,63 @@
 var albumBucketName = "imaginasdecanvas";
 var bucketRegion = "us-east-2";
 var IdentityPoolId = "us-east-2:e47d83d7-266a-4b5c-9395-4ef732c93df4";
+btn = document.getElementById('btn1');
+//grab create endpoint button from document
+ctn = document.getElementById('btn2');
+//grab h2 from document
+st = document.getElementById('status');
+
+var status;
+//pollAPI will check the status of endpoint congfiguration
+
+var apigClient = apigClientFactory.newClient();
+function pollAPI(){
+    //var apigClient = apigClientFactory.newClient();
+    var state;
+    var additionalParams = {};
+    var params = {};
+    var body = {};
+    var stateint;
+    apigClient.pollendpointGet(params, body, additionalParams)
+      .then(function(data, error){
+        //alert("Successfully called API")
+        //console.log(data.data.endpointstatus);
+        //jdata = data.parse();
+        //console.log(data.data.message);
+        //pred_num = data.data.message;
+        state = data.data.endpointstatus;
+        status = parseInt(state)
+        //state = parseInt(state, 10);
+        //console.log(state)
+        //document.getElementById("output").innerHTML = "You Predicted number is: "+data.data.message;
+        if(status == 1 ){
+          st.innerHTML = 'Endpoint is online!'
+          btn.disabled = false;
+          ctn.disabled = true;
+        }else if(status == -1){
+          btn.disabled = true;
+          ctn.disabled = true;
+          st.innerHTML = 'Endpoint being created. Estimated wait 6 minutes';
+        }
+        else{
+          btn.disabled = true;
+          ctn.disabled = false;
+          st.innerHTML = 'No endpoints in service. Press Create Endpoint to provision one. Estimated 6 minute wait.';
+        }
+      }).catch( function(data, error){
+        console.log(error);
+      });
+    console.log(status)
+    //grab send button from document
+}
+
+function fn60sec() {
+    status = pollAPI();
+
+}
+fn60sec();
+setInterval(fn60sec, 10*1000);
+
 
 AWS.config.update({
   region: bucketRegion,
@@ -84,7 +141,7 @@ function clearCanvas()
   clickX = new Array();
   clickY = new Array();
   clickDrag = new Array();
-  document.getElementById("output").innerHTML = "Your old number: " + clr + " Draw a new number!";
+  document.getElementById("output").innerHTML = "Old prediction: " + clr + " Draw a new number!";
 }
 function dataURItoBlob(dataURI) {
     var binary = atob(dataURI.split(',')[1]);
@@ -94,22 +151,44 @@ function dataURItoBlob(dataURI) {
     }
     return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
 }
+
+function createEndpoint(){
+  //var apigClient = apigClientFactory.newClient();
+  ctn.disabled = true;
+  var body = "y";
+  //JSON.stringify({});
+  var additionalParams = {};
+  var params = {};
+  apigClient.buildendpointPost(params,body, additionalParams)
+    .then(function(data, error){
+      //alert("Successfully called API")
+      console.log(data);
+      console.log('Successfully started api creation');
+    }).catch( function(data, error){
+      alert("Error in contacting API")
+      console.log(error);
+    }); 
+
+}
 function sendCanvas(){
   //var files = document.getElementById('canvas').files;
   //var files = context;
   //if (!files.length){
   //  return alert("we fucked up somewhere");
   //}
+
+      
   var dataUrl = canvas.toDataURL("image/jpeg");
   blobData = dataUrl.slice(23);
   console.log(blobData);
   //initialize api-gateway call
-  var apigClient = apigClientFactory.newClient();
+  //var apigClient = apigClientFactory.newClient();
+
   var body = {blobData};
   var additionalParams = {};
   var params = {};
   var pred_num = "";
-  apigClient.posttolambdaPost(params,body = blobData,additionalParams)
+  apigClient.requestendpointPost(params,body = blobData,additionalParams)
     .then(function(data, error){
       //alert("Successfully called API")
       console.log(data);

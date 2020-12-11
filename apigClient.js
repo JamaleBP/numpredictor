@@ -53,7 +53,7 @@ apigClientFactory.newClient = function (config) {
 
     
     // extract endpoint and path from url
-    var invokeUrl = 'https://v401hwl2ie.execute-api.us-east-2.amazonaws.com/Test1';
+    var invokeUrl = 'https://9r75mya2tb.execute-api.us-east-2.amazonaws.com/dev';
     var endpoint = /(^https?:\/\/[^\/]+)/g.exec(invokeUrl)[1];
     var pathComponent = invokeUrl.substring(endpoint.length);
 
@@ -83,39 +83,111 @@ apigClientFactory.newClient = function (config) {
     
     
     
-    apigClient.posttolambdaPost = function (params, body, additionalParams) {
+    apigClient.buildendpointPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var posttolambdaPostRequest = {
+        var buildendpointPostRequest = {
             verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/posttolambda').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/buildendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(posttolambdaPostRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(buildendpointPostRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.posttolambdaOptions = function (params, body, additionalParams) {
+    apigClient.buildendpointOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var posttolambdaOptionsRequest = {
+        var buildendpointOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/posttolambda').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/buildendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(posttolambdaOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(buildendpointOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pollendpointGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pollendpointGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/pollendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pollendpointGetRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.pollendpointOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var pollendpointOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/pollendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(pollendpointOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.requestendpointPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var requestendpointPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/requestendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(requestendpointPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.requestendpointOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var requestendpointOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/requestendpoint').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(requestendpointOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
 
